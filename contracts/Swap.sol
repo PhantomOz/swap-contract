@@ -10,4 +10,12 @@ contract Swap {
         tokenA = IERC20(_tokenA);
         tokenB = IERC20(_tokenB);
     }
+
+    function swapA(uint256 _amount) external {
+        if (tokenA.balanceOf(msg.sender) >= _amount) {
+            revert();
+        }
+        tokenA.transferFrom(msg.sender, address(this), _amount);
+        tokenB.transfer(msg.sender, _amount);
+    }
 }
